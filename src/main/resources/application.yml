@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: learning_course
+#  mvc:
+#    pathmatch:
+#      matching-strategy: ant_path_matcher
+  profiles:
+    active: parent
+  datasource:
+    url: jdbc:postgresql://localhost:15432/learning_course
+    username: learning_course
+    password: 123
+  liquibase:
+    enabled: true
+    drop-first: false
+    change_log: classpath:liquibase/changelog-master.yaml
+    contexts: general-ddl,general-data
