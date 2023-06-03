@@ -19,7 +19,6 @@ class Application /*: AbstractJavaFxApplicationSupport*/ {
 fun main(args: Array<String>) {
     @Suppress("SpreadOperator")
      SpringApplicationBuilder(Application::class.java)
-       // .web(WebApplicationType.NONE)
         .bannerMode(Banner.Mode.OFF)
         .run(*args)
 
