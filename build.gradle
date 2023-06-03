@@ -1,8 +1,4 @@
-//import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.springframework.boot.gradle.tasks.run.BootRun
-
-//val junitVersion : CharSequence by rootProject.properties
-//val kotlinVersion: String by rootProject.properties
 
 plugins {
     id 'org.springframework.boot' version '2.7.12'
@@ -29,13 +25,6 @@ tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
 }
 
-//tasks.withType(KotlinCompile) {
-//    kotlinOptions {
-//        freeCompilerArgs =  ["-Xjsr305=strict"]
-//        jvmTarget = projectJvmTarget
-//    }
-//}
-
 dependencies {
 
     // Spring Boot
@@ -44,12 +33,9 @@ dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-reflect'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-    // Kapt, Kotlin
     // JetBrains
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-   // implementation("org.jetbrains.kotlin.kapt:org.jetbrains.kotlin.kapt.gradle.plugin:$kotlinVersion")
-   // implementation("org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin:$kotlinVersion")
 
     // Database
     implementation("org.liquibase:liquibase-core")
