@@ -61,13 +61,3 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-params")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 }
-
-task bootRunLocal(type: BootRun) {
-    dependsOn(classes)
-
-    mainClass = "com.learningcourse.Application"
-    systemProperty("spring.profiles.active", "local")
-
-    group = "Application"
-    description = "Runs this project as a Spring Boot application with local DB in docker"
-}
