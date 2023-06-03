@@ -1,0 +1,12 @@
+version: '3.1'
+
+services:
+  postgres:
+    container_name: learning_course
+    image: postgres:14-alpine
+    ports:
+      - "15432:5432"
+    volumes:
+      - ./initdb/:/docker-entrypoint-initdb.d/
+    environment:
+      POSTGRES_PASSWORD: postgres

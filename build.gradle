@@ -1,0 +1,87 @@
+//import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.springframework.boot.gradle.tasks.run.BootRun
+
+//val junitVersion : CharSequence by rootProject.properties
+//val kotlinVersion: String by rootProject.properties
+
+plugins {
+    id 'org.springframework.boot' version '2.7.12'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    id 'org.jetbrains.kotlin.jvm' version '1.6.21'
+    id 'org.jetbrains.kotlin.plugin.spring' version '1.6.21'
+    id 'org.jetbrains.kotlin.plugin.jpa' version '1.6.21'
+}
+
+group = 'com.learningcourse'
+version = '1.0-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    set('junitVersion', "5.8.2")
+    set('testcontainersVersion', "1.18.3")
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+//tasks.withType(KotlinCompile) {
+//    kotlinOptions {
+//        freeCompilerArgs =  ["-Xjsr305=strict"]
+//        jvmTarget = projectJvmTarget
+//    }
+//}
+
+dependencies {
+
+    // Spring Boot
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.jetbrains.kotlin:kotlin-reflect'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // Kapt, Kotlin
+    // JetBrains
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+   // implementation("org.jetbrains.kotlin.kapt:org.jetbrains.kotlin.kapt.gradle.plugin:$kotlinVersion")
+   // implementation("org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin:$kotlinVersion")
+
+    // Database
+    implementation("org.liquibase:liquibase-core")
+    runtimeOnly("org.postgresql:postgresql")
+
+    // JavaFX
+    implementation("org.controlsfx:controlsfx:11.1.1")
+    implementation("com.dlsc.formsfx:formsfx-core:11.5.0") {
+        exclude(group: "org.openjfx")
+    }
+    implementation("net.synedra:validatorfx:0.3.1") {
+        exclude(group: "org.openjfx")
+    }
+    implementation("org.kordamp.ikonli:ikonli-javafx:12.3.1")
+    implementation("org.kordamp.bootstrapfx:bootstrapfx-core:0.4.0")
+
+    implementation("com.github.almasb:fxgl:17.1") {
+        exclude(group: "org.openjfx")
+    }
+
+    // Testing
+    testImplementation("org.junit.jupiter:junit-jupiter-api")
+    testImplementation("org.junit.jupiter:junit-jupiter-params")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+}
+
+task bootRunLocal(type: BootRun) {
+    dependsOn(classes)
+
+    mainClass = "com.learningcourse.Application"
+    systemProperty("spring.profiles.active", "local")
+
+    group = "Application"
+    description = "Runs this project as a Spring Boot application with local DB in docker"
+}

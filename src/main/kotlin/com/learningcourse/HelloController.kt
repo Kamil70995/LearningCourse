@@ -1,3 +1,4 @@
+/*
 package com.larningcourse.learningcourse
 
 import javafx.fxml.FXML
@@ -11,4 +12,4 @@ class HelloController {
     private fun onHelloButtonClick() {
         welcomeText.text = "Welcome to JavaFX Application!"
     }
-}
+}*/
