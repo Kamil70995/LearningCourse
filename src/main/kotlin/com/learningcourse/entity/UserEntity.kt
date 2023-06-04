@@ -4,7 +4,7 @@ import java.time.LocalDate
 import javax.persistence.*
 
 @Entity
-@Table(name = "user")
+@Table(name = "user_client")
 open class UserEntity(
     @Column(name = "user_name")
     open val name: String, //имя
