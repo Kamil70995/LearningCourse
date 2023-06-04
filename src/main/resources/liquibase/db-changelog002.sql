@@ -34,7 +34,7 @@ CREATE TABLE course
     course_title  VARCHAR(40) NOT NULL,
     course_author bigint      NOT NULL REFERENCES author (id),
     upload_date   DATE        NOT NULL,
-    content       VARCHAR(255)
+    content       oid
 );
 
 CREATE TABLE user_course
@@ -49,7 +49,7 @@ CREATE TABLE user_course
 CREATE TABLE test
 (
     id          bigint PRIMARY KEY,
-    content     VARCHAR(255),
+    content     oid,
     test_course bigint NOT NULL REFERENCES course (id)
 );
 

@@ -6,15 +6,15 @@ import javax.persistence.*
 @Entity
 @Table(name = "user_client")
 open class UserEntity(
-    @Column(name = "user_name")
+    @Column(name = "client_name")
     open val name: String, //имя
-    @Column(name = "user_lastname")
+    @Column(name = "client_lastname")
     open val lastName: String, // фамилия
-    @Column(name = "user_email")
+    @Column(name = "client_email")
     open val email: String, // mail клиента
-    @Column(name = "user_password")
+    @Column(name = "client_password")
     open val password: String, // пароль
-    @Column(name = "user_birthdate")
+    @Column(name = "client_birthdate")
     open val birthdate: LocalDate // дата рождения
 ) {
 
