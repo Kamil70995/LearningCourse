@@ -30,6 +30,8 @@ dependencies {
     // Spring Boot
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.jetbrains.kotlin:kotlin-reflect'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
@@ -40,21 +42,6 @@ dependencies {
     // Database
     implementation("org.liquibase:liquibase-core")
     runtimeOnly("org.postgresql:postgresql")
-
-    // JavaFX
-    implementation("org.controlsfx:controlsfx:11.1.1")
-    implementation("com.dlsc.formsfx:formsfx-core:11.5.0") {
-        exclude(group: "org.openjfx")
-    }
-    implementation("net.synedra:validatorfx:0.3.1") {
-        exclude(group: "org.openjfx")
-    }
-    implementation("org.kordamp.ikonli:ikonli-javafx:12.3.1")
-    implementation("org.kordamp.bootstrapfx:bootstrapfx-core:0.4.0")
-
-    implementation("com.github.almasb:fxgl:17.1") {
-        exclude(group: "org.openjfx")
-    }
 
     // Testing
     testImplementation("org.junit.jupiter:junit-jupiter-api")
