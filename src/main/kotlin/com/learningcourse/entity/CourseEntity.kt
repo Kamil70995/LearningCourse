@@ -5,6 +5,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "course")
+@SequenceGenerator(name = "pk_generator_course_entity", sequenceName = "course_pk_seq")
 open class CourseEntity(
 
     @Column(name = "course_title", updatable = false)
@@ -22,7 +23,7 @@ open class CourseEntity(
 ) {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pk_generator_course_entity")
     @Column(name = "id", updatable = false)
     open var id: Long? = null
 
