@@ -16,7 +16,7 @@ fun CourseEntity.toFrontCourseDto() = FrontCourseDto(
 
     it.id = this.id
     it.content = this.content
-    it.authorDto = this.courseAuthor.toTestFrontDto()
+    it.authorDto = this.courseAuthor.toAuthorFrontDto()
     it.testDto = testDtoListForFront
 }
 
