@@ -53,7 +53,7 @@ CREATE TABLE user_course
 CREATE SEQUENCE test_pk_seq INCREMENT BY 50;
 CREATE TABLE test
 (
-    id          bigint PRIMARY KEY DEFAULT nextval('test_pk_seq'),,
+    id          bigint PRIMARY KEY DEFAULT nextval('test_pk_seq'),
     content     oid,
     test_course bigint NOT NULL REFERENCES course (id)
 );

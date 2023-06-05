@@ -1,29 +1,54 @@
 package com.learningcourse.controller
 
+import com.learningcourse.dto.course.FrontDataCourseDto
+import com.learningcourse.dto.user.CreateUserDto
+import com.learningcourse.dto.user.FrontUserDto
+import com.learningcourse.dto.user.LoginUserDto
 import com.learningcourse.entity.CourseEntity
 import com.learningcourse.service.UserService
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.*
 
 @RequestMapping("users")
+@RestController
 class UserController(
     private val userService: UserService
 ) {
+
     /**
-     * форма всех курсов у клиента
+     * Добавление нового пользователя
      */
-    @GetMapping("course/all")
-    fun getCoursesForUser(@PathVariable id: Long) {
-        userService.getCoursesForUser(id)
+    @PostMapping("/create")
+    fun createUser(@RequestBody createUserDto: CreateUserDto): ResponseEntity<Void> {
+        userService.createUserIfNotExists(createUserDto)
+        return ResponseEntity(HttpStatus.CREATED)
     }
 
     /**
-     * Форма добавления курса для клиента
+     * Логин пользователя
+     */
+    @GetMapping("/login")
+    fun loginUser(@RequestBody loginUserDto: LoginUserDto): ResponseEntity<FrontUserDto> {
+        val loginUser: FrontUserDto = userService.loginUser(loginUserDto)
+        return ResponseEntity.ok(loginUser)
+    }
+
+    /**
+     * Поиск всех курсов у пользователя
+     */
+    @GetMapping("courses/{id}")
+    fun getCoursesForUser(@PathVariable("id") userId: Long): ResponseEntity<Set<FrontDataCourseDto>> {
+        val coursesForUser = userService.findCoursesForUser(userId)
+        return ResponseEntity.ok(coursesForUser)
+    }
+
+    /**
+     * Добавление курса для пользователя
      */
     @PostMapping("course/{id}")
-    fun addCourseForUser(@PathVariable id: Long, courseEntity: CourseEntity) {
-        userService.addCourseForUser(id, courseEntity)
+    fun addCourseForUser(@PathVariable("id") userId: Long, courseEntity: CourseEntity): ResponseEntity<Void> {
+        userService.addCourseForUser(userId, courseEntity)
+        return ResponseEntity(HttpStatus.OK)
     }
 }

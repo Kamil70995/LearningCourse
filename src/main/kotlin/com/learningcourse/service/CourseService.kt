@@ -1,23 +1,29 @@
 package com.learningcourse.service
 
+import com.learningcourse.converter.toFrontCourseDto
+import com.learningcourse.converter.toFrontDataCourseDto
+import com.learningcourse.dto.course.FrontCourseDto
+import com.learningcourse.dto.course.FrontDataCourseDto
 import com.learningcourse.entity.CourseEntity
-import com.learningcourse.entity.UserEntity
+import com.learningcourse.exception.InternalErrorException
 import com.learningcourse.repository.CourseRepository
-import org.springframework.stereotype.Component
+import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
-@Component
+@Service
 class CourseService(
     private val courseRepository: CourseRepository
 ) {
 
-    fun findById(id: Long) : CourseEntity {
-        return courseRepository.findById(id).orElseThrow()
-    }
-    fun findAll(): List<CourseEntity> {
-        return courseRepository.findAll()
+    @Transactional
+    fun findCourseById(courseId: Long): FrontCourseDto {
+        val courseById: CourseEntity = courseRepository.findById(courseId)
+            .orElseThrow { InternalErrorException("Невозможно отобразить информацию о курсе") }
+        return courseById.toFrontCourseDto()
     }
 
-    fun save(course: CourseEntity) : CourseEntity {
-        return courseRepository.save(course)
+    @Transactional
+    fun findAllCourses(): Set<FrontDataCourseDto> {
+        return courseRepository.findAll().map { it.toFrontDataCourseDto() }.toSet()
     }
 }
