@@ -5,6 +5,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "user_client")
+@SequenceGenerator(name = "pk_generator_user_entity", sequenceName = "user_client_pk_seq")
 open class UserEntity(
     @Column(name = "client_name")
     open val name: String, //имя
@@ -17,10 +18,11 @@ open class UserEntity(
     @Column(name = "client_birthdate")
     open val birthdate: LocalDate // дата рождения
 ) {
+    constructor() : this("", "", "", "", LocalDate.now())
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", updatable = false)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pk_generator_user_entity")
+    @Column(name = "id")
     open var id: Long? = null
 
     /**
